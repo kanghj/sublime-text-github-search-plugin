@@ -4,7 +4,7 @@ A plugin to search github code.
 
 #Usage
 
-On any piece of code, highlight it and press ctrl+alt+g. 
+On any piece of code, highlight it and press ctrl+alt+g. Alernatively, select `Github Code Search` when right-clicking on any selected code.
 
 
 #Future work
