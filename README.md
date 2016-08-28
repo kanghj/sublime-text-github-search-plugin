@@ -1,4 +1,4 @@
-# sublime-text-github-search-plugin
+# Sublime Text Github Code Search plugin
 
 A plugin to search github code.
 
