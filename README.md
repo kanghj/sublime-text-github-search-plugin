@@ -1,10 +1,10 @@
-# Sublime Text Github Code Search plugin
+# Sublime Text Github Issue Search plugin
 
-A plugin to search github code.
+A plugin to search github issues.
 
 #Usage
 
-On any piece of code, highlight it and press ctrl+alt+g. Alernatively, select `Github Code Search` when right-clicking on any selected code.
+On any piece of code, highlight it and press ctrl+alt+g. Alernatively, select `Github Issue Search` when right-clicking on any selected code.
 
 
 #Future work

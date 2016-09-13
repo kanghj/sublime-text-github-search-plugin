@@ -21,4 +21,4 @@ class SearchGithubCommand(sublime_plugin.TextCommand):
 
             text = self.view.substr(selection)
 
-            webbrowser.open_new_tab( 'https://github.com/search?q=%s&ref=simplesearch&type=Code' % (encode(text), ) )
+            webbrowser.open_new_tab( 'https://github.com/search?q=%s&ref=simplesearch&type=Issues' % (encode(text), ) )
