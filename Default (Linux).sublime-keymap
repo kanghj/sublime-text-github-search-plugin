@@ -1,6 +1,6 @@
 [
 	{
 		"keys": ["ctrl+alt+g"], 
-		"command":"search_github"
+		"command":"search_github_code"
 	}
 ]

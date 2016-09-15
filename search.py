@@ -12,13 +12,22 @@ else:
         import urllib
         return urllib.quote_plus(text)
 
+def open_search_tab(text, search_type):
+    
+    webbrowser.open_new_tab( 'https://github.com/search?q=%s&ref=simplesearch&type=%s' % (encode(text), search_type) )
 
-class SearchGithubCommand(sublime_plugin.TextCommand):
+class SearchGithubIssueCommand(sublime_plugin.TextCommand):
+    def run(self, edit):
+        for selection in self.view.sel():
+            if selection.empty():
+                continue
+                
+            open_search_tab(self.view.substr(selection), 'Issues')
+
+class SearchGithubCodeCommand(sublime_plugin.TextCommand):
     def run(self, edit):
         for selection in self.view.sel():
             if selection.empty():
                 continue
 
-            text = self.view.substr(selection)
-
-            webbrowser.open_new_tab( 'https://github.com/search?q=%s&ref=simplesearch&type=Issues' % (encode(text), ) )
+            open_search_tab(self.view.substr(selection), 'Code')

@@ -1,7 +1,16 @@
 
 [
     {
-        "command": "search_github",
-        "caption": "Github Issue Search"
+        "caption": "Github Search",
+        "children": [
+            {
+                "command": "search_github_code",
+                "caption": "Github Code Search"
+            },
+            {
+                "command": "search_github_issue",
+                "caption": "Github Issue Search"
+            }
+        ]
     }
 ]
