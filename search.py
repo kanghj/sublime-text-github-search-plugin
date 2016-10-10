@@ -20,6 +20,7 @@ try:
 except ImportError:
     from urllib2 import Request, urlopen, URLError
 
+
 def open_search_tab(text, search_type):
     
     webbrowser.open_new_tab( 'https://github.com/search?q=%s&ref=simplesearch&type=%s' % (encode(text), search_type) )
@@ -31,12 +32,6 @@ def github_token():
     except:
         return ''
 
-def user_email():
-    try:
-        plugin_settings = sublime.load_settings("GithubSearch.sublime-settings")
-        return plugin_settings.get('username')['github.com']
-    except:
-        return ''
 
 class SearchGithubIssueCommand(sublime_plugin.TextCommand):
     def run(self, edit):
