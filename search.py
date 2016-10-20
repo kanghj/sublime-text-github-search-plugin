@@ -32,6 +32,10 @@ def github_token():
     except:
         return ''
 
+def current_language():
+    syntax = os.path.basename(view.settings().get('syntax'))
+    return os.path.splitext(syntax)[0]
+
 
 class SearchGithubIssueCommand(sublime_plugin.TextCommand):
     def run(self, edit):
@@ -60,8 +64,16 @@ class SearchGithubCodeCommand(sublime_plugin.TextCommand):
             resp = urlopen(req).read()
 
             github_data = json.loads(resp.decode('utf8', 'ignore'))
+            # for item in github_data['items']:
+            #     text_match = item['text_matches'][0]['fragment']
+            #     print(text_match)
 
-            self.view.show_popup('<div style="background-color:rgba(123,123,123);"> ' + str(5) + '</div>', sublime.HIDE_ON_MOUSE_MOVE_AWAY, -1, 480, 700)
+            print(github_data)
+
+            self.view.show_popup(
+                '<div style="background-color:rgba(123,123,123);"> ' + github_data['items'][0]['text_matches'][0]['fragment'] +
+                 '</div>', sublime.HIDE_ON_MOUSE_MOVE_AWAY, -1, 480, 700
+            )
 
             
 
