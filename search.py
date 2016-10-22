@@ -32,7 +32,8 @@ def github_token():
     except:
         return ''
 
-def current_language():
+def current_language(view):
+    import os
     syntax = os.path.basename(view.settings().get('syntax'))
     return os.path.splitext(syntax)[0]
 
@@ -49,7 +50,6 @@ class SearchGithubCodeCommand(sublime_plugin.TextCommand):
     def run(self, edit):
         pset = sublime.PhantomSet(self.view)
         token = github_token()
-        
 
         for selection in self.view.sel():
             if selection.empty():
@@ -57,23 +57,22 @@ class SearchGithubCodeCommand(sublime_plugin.TextCommand):
             
 
             selected = self.view.substr(selection)
-            print('https://api.github.com/search/code?q=' + encode(selected))
-            req = Request('https://api.github.com/search/code?q=' + encode(selected))
+            
+            req = Request('https://api.github.com/search/code?q=' + 
+                encode(selected) + '&language=' + current_language(self.view))
             req.add_header('Authorization', 'token ' + token)
             req.add_header('Accept', 'application/vnd.github.v3.text-match+json')
             resp = urlopen(req).read()
 
             github_data = json.loads(resp.decode('utf8', 'ignore'))
-            # for item in github_data['items']:
-            #     text_match = item['text_matches'][0]['fragment']
-            #     print(text_match)
-
-            print(github_data)
+            
+            first_result = github_data['items'][0]['text_matches'][0]
+            first_fragment = first_result['fragment']
+            fragment_url = first_result['object_url']
 
             self.view.show_popup(
-                '<div style="background-color:rgba(123,123,123);"> ' + github_data['items'][0]['text_matches'][0]['fragment'] +
+                '<div style="background-color:rgba(123,123,123);"> ' + 
+                first_fragment.replace('\n', '<br>') +
+                '<br>' + '<a href="' + fragment_url + '"> View </a>'
                  '</div>', sublime.HIDE_ON_MOUSE_MOVE_AWAY, -1, 480, 700
             )
-
-            
-
