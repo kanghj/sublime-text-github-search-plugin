@@ -37,6 +37,14 @@ def current_language(view):
     syntax = os.path.basename(view.settings().get('syntax'))
     return os.path.splitext(syntax)[0]
 
+def make_view(window, edit, text):
+    view = window.new_file()
+    view.set_scratch(True)
+    view.set_read_only(False)
+    view.replace(edit, sublime.Region(0, view.size()), text)
+    
+    view.set_read_only(True)
+    return view
 
 class SearchGithubIssueCommand(sublime_plugin.TextCommand):
     def run(self, edit):
@@ -66,13 +74,16 @@ class SearchGithubCodeCommand(sublime_plugin.TextCommand):
 
             github_data = json.loads(resp.decode('utf8', 'ignore'))
             
-            first_result = github_data['items'][0]['text_matches'][0]
-            first_fragment = first_result['fragment']
-            fragment_url = first_result['object_url']
+            result_str = ''
 
-            self.view.show_popup(
-                '<div style="background-color:rgba(123,123,123);"> ' + 
-                first_fragment.replace('\n', '<br>') +
-                '<br>' + '<a href="' + fragment_url + '"> View </a>'
-                 '</div>', sublime.HIDE_ON_MOUSE_MOVE_AWAY, -1, 480, 700
-            )
+            for i, item in enumerate(github_data['items']):
+
+                first_result = item['text_matches'][0]
+                first_fragment = first_result['fragment']
+                fragment_url = first_result['object_url']
+
+                result_str += first_fragment + '\n==========================\n'
+
+            view = make_view(self.view.window(), edit, result_str)
+            # self.view.window().focus_view(view)
+
