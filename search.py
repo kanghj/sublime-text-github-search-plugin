@@ -56,7 +56,7 @@ class SearchGithubIssueCommand(sublime_plugin.TextCommand):
 
 class SearchGithubCodeCommand(sublime_plugin.TextCommand):
     def run(self, edit):
-        pset = sublime.PhantomSet(self.view)
+ 
         token = github_token()
 
         for selection in self.view.sel():
@@ -85,5 +85,5 @@ class SearchGithubCodeCommand(sublime_plugin.TextCommand):
                 result_str += first_fragment + '\n==========================\n'
 
             view = make_view(self.view.window(), edit, result_str)
-            # self.view.window().focus_view(view)
+
 
