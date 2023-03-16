@@ -1,0 +1,5 @@
+[
+  { "caption": "Github Search:Code Search", "command": "search_github_code" },
+  { "caption": "Github Search:Issue Search", "command": "search_github_issue" },
+  { "caption": "Github Search:Pull Request Search", "command": "search_github_pull_request" }
+]

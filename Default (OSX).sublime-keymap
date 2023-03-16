@@ -1,6 +1,14 @@
 [
 	{
-		"keys": ["ctrl+alt+g"], 
+		"keys": ["ctrl+alt+g", "ctrl+alt+c"],
 		"command":"search_github_code"
-	}
+	},
+    {
+        "keys": ["ctrl+alt+g", "ctrl+alt+i"],
+        "command":"search_github_issue"
+    },
+    {
+        "keys": ["ctrl+alt+g", "ctrl+alt+p"],
+        "command":"search_github_pull_request"
+    }
 ]

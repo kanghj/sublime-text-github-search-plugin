@@ -10,6 +10,10 @@
             {
                 "command": "search_github_issue",
                 "caption": "Github Issue Search"
+            },
+            {
+                "command": "search_github_pull_request",
+                "caption": "Github Pull Request Search"
             }
         ]
     }
